@@ -1,6 +1,6 @@
 [package]
-name = "file-tree"
-version = "0.0.0"
+name = "folder-size"
+version = "0.0.1"
 description = "A Tauri App"
 authors = ["you"]
 license = ""

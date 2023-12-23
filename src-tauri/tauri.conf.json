@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "file-tree",
-    "version": "0.0.0"
+    "productName": "folder-size",
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -47,7 +47,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "file-tree",
+        "title": "folder-size",
         "width": 800,
         "height": 600
       }
