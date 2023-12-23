@@ -12,41 +12,42 @@ async function selectFile() {
     await list_file(file)
 }
 
-async function rowClick(event) {
+async function rowClick(event: any) {
     await list_file(event.rowData.file_path)
 }
 
 async function fileChangeToParent() {
-    let getFileParentPathRes = await invoke("get_file_parent_path", {folderPath: selectedFile.value});
-    if(!getFileParentPathRes.success){
+    let getFileParentPathRes: any = await invoke("get_file_parent_path", {folderPath: selectedFile.value});
+    if (!getFileParentPathRes.success) {
         ElMessageBox.alert(getFileParentPathRes.msg, "错误")
         return
     }
     await list_file(getFileParentPathRes.data)
 }
 
-async function list_file(file) {
+async function list_file(file: any) {
     selectedFile.value = file;
-    let listFileRes = await invoke("list_file", {folderPath: file});
+    let listFileRes: any = await invoke("list_file", {folderPath: file});
     if (!listFileRes.success) {
         ElMessageBox.alert(listFileRes.msg, "错误")
         file_list.value = []
         return;
     }
     let subFiles = listFileRes.data;
-    subFiles.sort((a1, a2) => a2.file_size - a1.file_size)
+    subFiles.sort((a1: any, a2: any) => a2.file_size - a1.file_size)
     for (let subFile of subFiles) {
         subFile.file_size_str = humanFileSize(subFile.file_size);
     }
     file_list.value = subFiles;
 }
 
-function humanFileSize(size) {
+function humanFileSize(size: number) {
     if (size < 1) {
         return "0";
     }
     let i = Math.floor(Math.log(size) / Math.log(1024));
-    return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+    let val = (size / Math.pow(1024, i)).toFixed(2);
+    return val + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
 }
 
 const file_columns = [{key: "file_path", dataKey: "file_path", title: "文件路径", width: 800}, {
