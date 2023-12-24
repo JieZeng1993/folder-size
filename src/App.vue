@@ -64,7 +64,7 @@ const selectedFile = ref("");
 <template>
     <div class="container">
         <el-button type="primary" @click="selectFile" size="small">选择文件</el-button>
-        <el-tag type="success" size="large">已选择路径：{{ selectedFile }}</el-tag>
+        已选择路径：<el-input style="display: inline" v-model="selectedFile" @keyup.enter="list_file(selectedFile)"></el-input>
         <el-icon v-if="selectedFile" @click="fileChangeToParent">
             <ArrowUpBold />
         </el-icon>
